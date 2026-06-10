@@ -88,9 +88,28 @@
       .filter((g) => g.items.length > 0);
   }
 
+  /* Distribute whole categories across N columns (in order, never splitting
+     a category) so every category starts at the top of a column. */
+  function packColumns(groups, n) {
+    const weight = (g) => g.items.length + 1.6; // 1.6 ≈ space a title takes
+    const total = groups.reduce((a, g) => a + weight(g), 0);
+    const target = total / n;
+    const cols = [];
+    let col = [], used = 0;
+    for (const g of groups) {
+      // Start a new column if this one is full (but never exceed n columns)
+      if (col.length && used + weight(g) > target * 1.15 && cols.length < n - 1) {
+        cols.push(col); col = []; used = 0;
+      }
+      col.push(g); used += weight(g);
+    }
+    if (col.length) cols.push(col);
+    return cols;
+  }
+
   // Expose pure functions for automated tests (Node); skip browser boot there.
   if (typeof module !== "undefined" && typeof document === "undefined") {
-    module.exports = { parseCSV, toItems, parsePrice, formatPrice, groupItems };
+    module.exports = { parseCSV, toItems, parsePrice, formatPrice, groupItems, packColumns };
     return;
   }
 
@@ -113,19 +132,24 @@
 
   function render(items) {
     const groups = groupItems(items, PAGE.categories);
+    const cols = packColumns(groups, PAGE.columns);
     let html = "";
-    for (const g of groups) {
-      const label = CATEGORY_LABELS[g.cat] || g.cat;
-      html += '<section class="category">';
-      html += '<h2 class="category-title">' + escapeHTML(label) + "</h2>";
-      html += '<ul class="items">';
-      for (const it of g.items) {
-        html +=
-          '<li class="item"><span class="item-name">' + escapeHTML(it.name) +
-          '</span><span class="item-dots"></span><span class="item-price">' +
-          escapeHTML(formatPrice(it)) + "</span></li>";
+    for (const colGroups of cols) {
+      html += '<div class="board-col">';
+      for (const g of colGroups) {
+        const label = CATEGORY_LABELS[g.cat] || g.cat;
+        html += '<section class="category">';
+        html += '<h2 class="category-title">' + escapeHTML(label) + "</h2>";
+        html += '<ul class="items">';
+        for (const it of g.items) {
+          html +=
+            '<li class="item"><span class="item-name">' + escapeHTML(it.name) +
+            '</span><span class="item-dots"></span><span class="item-price">' +
+            escapeHTML(formatPrice(it)) + "</span></li>";
+        }
+        html += "</ul></section>";
       }
-      html += "</ul></section>";
+      html += "</div>";
     }
     els.board.innerHTML =
       html || '<p class="empty">No items to display. Check the Category and Active columns in the sheet.</p>';
