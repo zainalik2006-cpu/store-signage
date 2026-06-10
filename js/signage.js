@@ -96,9 +96,58 @@
       .filter((col) => col.length > 0); // drop columns with nothing to show
   }
 
+  /* Turn a Google Drive share link into a direct image URL;
+     pass any other URL through unchanged. */
+  function convertImageURL(url) {
+    if (!url) return "";
+    const m =
+      url.match(/drive\.google\.com\/file\/d\/([\w-]+)/) ||
+      url.match(/drive\.google\.com\/(?:open|uc)\?.*?id=([\w-]+)/);
+    if (m) return "https://drive.google.com/thumbnail?id=" + m[1] + "&sz=w1920";
+    return url;
+  }
+
+  /* Parse the "Slides" sheet tab into promo slide objects for this TV.
+     Expected columns: Title | Text | Image Link | Seconds | Screens | Active */
+  function toSlides(rows, pageKey) {
+    if (!rows.length) return [];
+    const h = rows[0].map((x) => x.trim().toLowerCase());
+    const idx = (names) => {
+      for (const n of names) { const i = h.indexOf(n); if (i >= 0) return i; }
+      return -1;
+    };
+    const iTitle = idx(["title"]), iText = idx(["text", "subtitle"]),
+          iImg = idx(["image link", "image", "image url", "photo"]),
+          iSec = idx(["seconds", "duration"]), iScr = idx(["screens", "screen", "tv"]),
+          iAct = idx(["active"]);
+    const out = [];
+    for (let r = 1; r < rows.length; r++) {
+      const row = rows[r];
+      const title = ((iTitle >= 0 && row[iTitle]) || "").trim();
+      const image = convertImageURL(((iImg >= 0 && row[iImg]) || "").trim());
+      if (!title && !image) continue; // blank row
+      if (iAct >= 0) {
+        const act = ((row[iAct]) || "").trim().toLowerCase();
+        if (["true", "yes", "y", "1"].indexOf(act) < 0) continue;
+      }
+      // Screens: "chicken", "meat", "both"/"all"/blank = every TV
+      const scr = ((iScr >= 0 && row[iScr]) || "").trim().toLowerCase();
+      if (scr && ["both", "all"].indexOf(scr) < 0 && scr.indexOf(pageKey) < 0) continue;
+      let sec = parseFloat((iSec >= 0 && row[iSec]) || "");
+      if (!isFinite(sec) || sec <= 0) sec = 10;
+      out.push({
+        title: title,
+        text: ((iText >= 0 && row[iText]) || "").trim(),
+        image: image,
+        seconds: Math.min(Math.max(sec, 3), 120),
+      });
+    }
+    return out;
+  }
+
   // Expose pure functions for automated tests (Node); skip browser boot there.
   if (typeof module !== "undefined" && typeof document === "undefined") {
-    module.exports = { parseCSV, toItems, parsePrice, formatPrice, groupItems, buildColumns };
+    module.exports = { parseCSV, toItems, parsePrice, formatPrice, groupItems, buildColumns, toSlides, convertImageURL };
     return;
   }
 
@@ -186,6 +235,62 @@
       if (lastGoodCSV === null) els.loading.classList.add("hidden");
       els.errorBar.classList.remove("hidden");
     }
+  }
+
+  /* ---------- Promo slides (optional rotation) ---------- */
+  // Fallbacks so an older config.js still works without slides
+  const SLIDES_URL = (typeof SLIDES_CSV_URL !== "undefined") ? SLIDES_CSV_URL : "";
+  const PRICES_SECS = (typeof PRICES_SECONDS !== "undefined") ? PRICES_SECONDS : 45;
+  const SLIDES_ENABLED = SLIDES_URL && SLIDES_URL.indexOf("PASTE_") !== 0;
+
+  let slides = [];
+  const overlay = document.createElement("div");
+  overlay.id = "slide-overlay";
+  overlay.innerHTML =
+    '<div class="slide-bg"></div><div class="slide-shade"></div>' +
+    '<div class="slide-content"><div class="slide-title"></div><div class="slide-text"></div></div>' +
+    '<div class="slide-brand">halal4allshop.com</div>';
+  document.body.appendChild(overlay);
+
+  async function refreshSlides() {
+    try {
+      const sep = SLIDES_URL.indexOf("?") >= 0 ? "&" : "?";
+      const res = await fetch(SLIDES_URL + sep + "t=" + Date.now(), { cache: "no-store" });
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      slides = toSlides(parseCSV(await res.text()), PAGE_KEY);
+      // Preload images so slides appear instantly
+      slides.forEach((s) => { if (s.image) { const im = new Image(); im.src = s.image; } });
+    } catch (err) {
+      console.error("Slides refresh failed:", err); // keep last good slides
+    }
+  }
+
+  function renderSlide(s) {
+    overlay.querySelector(".slide-bg").style.backgroundImage = s.image ? 'url("' + s.image + '")' : "none";
+    overlay.querySelector(".slide-title").textContent = s.title;
+    overlay.querySelector(".slide-text").textContent = s.text;
+    overlay.classList.toggle("no-image", !s.image);
+  }
+
+  /* Rotation loop: prices for PRICES_SECS → each slide → prices → … */
+  let rotTimer = null;
+  function rotate(idx) {
+    clearTimeout(rotTimer);
+    if (idx >= slides.length) idx = -1; // also covers "no slides yet"
+    if (idx < 0) {
+      overlay.classList.remove("show"); // back to the price board
+      rotTimer = setTimeout(() => rotate(0), Math.max(10, PRICES_SECS) * 1000);
+    } else {
+      renderSlide(slides[idx]);
+      overlay.classList.add("show");
+      rotTimer = setTimeout(() => rotate(idx + 1), slides[idx].seconds * 1000);
+    }
+  }
+
+  if (SLIDES_ENABLED) {
+    refreshSlides();
+    setInterval(refreshSlides, POLL_INTERVAL_MS);
+    rotate(-1);
   }
 
   /* ---------- Live clock (footer) ---------- */

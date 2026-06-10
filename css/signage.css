@@ -184,3 +184,71 @@ footer .halal-note { color: var(--gold-soft); font-weight: 600; }
 }
 #error-bar { bottom: 0; background: #8a1f1f; color: var(--white); }
 #demo-bar  { top: 0; background: var(--gold); color: var(--black); font-weight: 600; }
+
+/* ---------------- Promo slides (rotation) ---------------- */
+#slide-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 15;             /* above the board, below loading/error bars */
+  background: linear-gradient(160deg, var(--green-deep) 0%, var(--green-dark) 100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.7s ease;
+}
+#slide-overlay.show { opacity: 1; }
+
+.slide-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+}
+
+.slide-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(8, 42, 33, 0.25) 35%, rgba(8, 42, 33, 0.88) 100%);
+}
+
+.slide-content {
+  position: absolute;
+  left: 5vw;
+  bottom: 7vw;
+  max-width: 70vw;
+}
+
+/* Text-only slides: center everything instead */
+#slide-overlay.no-image .slide-content {
+  left: 50%;
+  top: 50%;
+  bottom: auto;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  max-width: 80vw;
+}
+
+.slide-title {
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 700;
+  font-size: 5.5vw;
+  line-height: 1.1;
+  color: var(--gold-soft);
+  text-shadow: 0 0.2vw 1vw rgba(0, 0, 0, 0.45);
+}
+
+.slide-text {
+  margin-top: 1vw;
+  font-size: 2.4vw;
+  color: var(--beige-soft);
+  text-shadow: 0 0.15vw 0.8vw rgba(0, 0, 0, 0.45);
+}
+
+.slide-brand {
+  position: absolute;
+  right: 3vw;
+  bottom: 2vw;
+  color: var(--gold-soft);
+  font-weight: 700;
+  font-size: 1.4vw;
+  letter-spacing: 0.12em;
+}
