@@ -176,6 +176,16 @@
     }
   }
 
+  /* ---------- Live clock (footer) ---------- */
+  const clockEl = document.getElementById("clock");
+  function tickClock() {
+    if (clockEl) {
+      clockEl.textContent = new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+    }
+  }
+  tickClock();
+  setInterval(tickClock, 1000);
+
   /* ---------- Boot ---------- */
   document.getElementById("page-heading").textContent = PAGE.heading;
   document.title = PAGE.heading;

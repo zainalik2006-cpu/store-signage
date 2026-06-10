@@ -130,7 +130,16 @@ footer {
 }
 
 footer .halal-note { color: var(--gold-soft); font-weight: 600; }
-#last-updated { opacity: 0.75; }
+#last-updated { opacity: 0.6; font-size: 0.8vw; margin-left: 0.6vw; }
+
+.foot-right { display: flex; align-items: center; gap: 1.2vw; }
+.website { color: var(--gold-soft); font-weight: 700; letter-spacing: 0.08em; }
+#clock {
+  font-weight: 700;
+  font-size: 1.2vw;
+  font-variant-numeric: tabular-nums;
+  color: var(--white);
+}
 
 /* ---------------- Status overlays ---------------- */
 .hidden { display: none !important; }
