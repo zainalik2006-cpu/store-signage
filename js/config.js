@@ -18,22 +18,27 @@ const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTxidFn5x
    20000 = every 20 seconds. Don't go below 10000.                  */
 const POLL_INTERVAL_MS = 20000;
 
-/* 3. Which categories appear on which TV.
-   These must EXACTLY match the "Category" column in your sheet.
-   To add a category to a TV, add it to the list below.             */
+/* 3. Which categories appear on which TV, and in which column.
+   Each inner [list] is ONE column on screen, left → right.
+   Categories in the same [list] stack under each other.
+   Names must EXACTLY match the "Category" column in your sheet.    */
 const PAGES = {
   chicken: {
     heading: "Fresh Halal Chicken & Marinated Items",
-    categories: ["Regular Chicken", "ABF Chicken", "Marinated Chicken"],
-    columns: 3, // category columns on screen
+    columns: [
+      ["Regular Chicken"],
+      ["ABF Chicken"],
+      ["Marinated Chicken"],
+    ],
   },
   meat: {
     heading: "Fresh Halal Beef, Goat, Lamb & Steaks",
-    categories: [
-      "Beef", "Veal", "Steaks", "Marinated Beef & Deli",
-      "Goat", "Baby Goat", "Lamb", "Baby Lamb",
+    columns: [
+      ["Beef", "Veal"],
+      ["Goat", "Baby Goat"],
+      ["Lamb", "Baby Lamb"],
+      ["Steaks", "Marinated Beef & Deli"],
     ],
-    columns: 4,
   },
 };
 
