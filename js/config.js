@@ -1,0 +1,46 @@
+/* ============================================================
+   CONFIGURATION — this is the ONLY file you need to edit.
+   ============================================================ */
+
+/* 1. PASTE YOUR GOOGLE SHEET CSV LINK BELOW.
+
+   How to get it (see README.md for pictures/steps):
+   - In Google Sheets: File → Share → Publish to web
+   - Choose your price sheet tab, choose "Comma-separated values (.csv)"
+   - Click Publish, copy the link, and paste it between the quotes below.
+
+   While this still says "PASTE_YOUR_GOOGLE_SHEET_CSV_URL_HERE",
+   the pages run in DEMO MODE using the local sheet-data.csv file,
+   so you can preview the design before connecting the sheet.       */
+const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTxidFn5xUeXl32LO9uJznRtIWNx0BFEDAuzZ05jQEnD5uU8-gc2OsikS8XvPwE4_3sHhv2VAO2cV5j/pub?gid=1956136998&single=true&output=csv";
+
+/* 2. How often to check the sheet for new prices (milliseconds).
+   20000 = every 20 seconds. Don't go below 10000.                  */
+const POLL_INTERVAL_MS = 20000;
+
+/* 3. Which categories appear on which TV.
+   These must EXACTLY match the "Category" column in your sheet.
+   To add a category to a TV, add it to the list below.             */
+const PAGES = {
+  chicken: {
+    heading: "Fresh Halal Chicken & Marinated Items",
+    categories: ["Regular Chicken", "ABF Chicken", "Marinated Chicken"],
+    columns: 3, // category columns on screen
+  },
+  meat: {
+    heading: "Fresh Halal Beef, Goat, Lamb & Steaks",
+    categories: [
+      "Beef", "Veal", "Steaks", "Marinated Beef & Deli",
+      "Goat", "Baby Goat", "Lamb", "Baby Lamb",
+    ],
+    columns: 4,
+  },
+};
+
+/* 4. Pretty display names for categories (optional). */
+const CATEGORY_LABELS = {
+  "Regular Chicken": "Regular Chicken — Hand Cut",
+  "ABF Chicken": "ABF Chicken — Hand Cut",
+  "Marinated Chicken": "Marinated Chicken",
+  "Marinated Beef & Deli": "Marinated & Deli",
+};

@@ -1,0 +1,171 @@
+/* ============================================================
+   HALAL 4 ALL — Digital Signage Styles
+   Designed for 16:9 TVs (1080p / 4K). Sizes use vw units so the
+   layout scales with the screen; --scale is set by signage.js to
+   shrink content automatically until everything fits.
+   ============================================================ */
+
+:root {
+  --green-deep: #0c3b2e;
+  --green-dark: #082a21;
+  --black: #131311;
+  --beige: #f3ecdd;
+  --beige-soft: #faf6ec;
+  --gold: #c9a227;
+  --gold-soft: #e3c869;
+  --white: #ffffff;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body { height: 100%; overflow: hidden; }
+
+body {
+  display: flex;
+  flex-direction: column;
+  background:
+    radial-gradient(120% 90% at 50% 0%, var(--beige-soft) 0%, var(--beige) 70%);
+  color: var(--black);
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+  cursor: none; /* hide mouse pointer on the TV */
+}
+
+/* ---------------- Header ---------------- */
+header {
+  flex: 0 0 auto;
+  background: linear-gradient(180deg, var(--green-deep) 0%, var(--green-dark) 100%);
+  color: var(--white);
+  text-align: center;
+  padding: 1.1vw 2vw 1.2vw;
+  border-bottom: 0.35vw solid var(--gold);
+}
+
+.brand {
+  font-family: "Playfair Display", Georgia, serif;
+  color: var(--gold-soft);
+  font-size: 1.25vw;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  margin-bottom: 0.3vw;
+}
+
+#page-heading {
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 700;
+  font-size: 2.8vw;
+  line-height: 1.15;
+}
+
+/* ---------------- Board (item area) ---------------- */
+#board {
+  flex: 1 1 auto;
+  overflow: hidden;
+  padding: 1.2vw 1.6vw;
+  column-gap: 1.6vw;
+}
+
+body[data-page="chicken"] #board { column-count: 3; }
+body[data-page="meat"]    #board { column-count: 4; }
+
+.category { margin-bottom: calc(var(--scale, 1) * 1.1vw); }
+
+.category-title {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: calc(var(--scale, 1) * 1.55vw);
+  color: var(--green-deep);
+  border-bottom: 0.18vw solid var(--gold);
+  padding-bottom: 0.25vw;
+  margin-bottom: 0.45vw;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  break-after: avoid;            /* keep title attached to its items */
+}
+
+.items { list-style: none; }
+
+.item {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5vw;
+  font-size: calc(var(--scale, 1) * 1.18vw);
+  line-height: calc(var(--scale, 1) * 1.85vw);
+  break-inside: avoid;           /* never split a row across columns */
+}
+
+.item-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.item-dots {
+  flex: 1 1 auto;
+  border-bottom: 0.14vw dotted rgba(19, 19, 17, 0.35);
+  transform: translateY(-0.28vw);
+  min-width: 1vw;
+}
+
+.item-price {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--green-deep);
+  white-space: nowrap;
+}
+
+.empty {
+  font-size: 2vw;
+  text-align: center;
+  padding-top: 8vw;
+  color: var(--green-deep);
+}
+
+/* ---------------- Footer ---------------- */
+footer {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--green-dark);
+  color: var(--beige);
+  border-top: 0.25vw solid var(--gold);
+  padding: 0.55vw 1.6vw;
+  font-size: 0.95vw;
+  letter-spacing: 0.04em;
+}
+
+footer .halal-note { color: var(--gold-soft); font-weight: 600; }
+#last-updated { opacity: 0.75; }
+
+/* ---------------- Status overlays ---------------- */
+.hidden { display: none !important; }
+
+#loading {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5vw;
+  background: var(--beige);
+  z-index: 20;
+  color: var(--green-deep);
+  font-size: 1.6vw;
+}
+
+.spinner {
+  width: 4vw;
+  height: 4vw;
+  border: 0.45vw solid rgba(12, 59, 46, 0.2);
+  border-top-color: var(--gold);
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+#error-bar, #demo-bar {
+  position: fixed;
+  left: 0; right: 0;
+  text-align: center;
+  font-size: 1vw;
+  padding: 0.4vw;
+  z-index: 30;
+}
+#error-bar { bottom: 0; background: #8a1f1f; color: var(--white); }
+#demo-bar  { top: 0; background: var(--gold); color: var(--black); font-weight: 600; }
