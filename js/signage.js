@@ -107,8 +107,15 @@
     return url;
   }
 
+  /* Is this URL a video file? (.mp4, .webm, .mov, .m4v) */
+  function isVideoURL(url) {
+    return /\.(mp4|webm|mov|m4v)(\?|#|$)/i.test(url || "");
+  }
+
   /* Parse the "Slides" sheet tab into promo slide objects for this TV.
-     Expected columns: Title | Text | Image Link | Seconds | Screens | Active */
+     Columns: Title | Text | Image Link | Seconds | Screens | Active | Fit
+     - Image Link also accepts video files (.mp4 etc.)
+     - Fit: "fill" (default, crops to fill screen) or "fit" (show whole photo) */
   function toSlides(rows, pageKey) {
     if (!rows.length) return [];
     const h = rows[0].map((x) => x.trim().toLowerCase());
@@ -117,15 +124,17 @@
       return -1;
     };
     const iTitle = idx(["title"]), iText = idx(["text", "subtitle"]),
-          iImg = idx(["image link", "image", "image url", "photo"]),
+          iImg = idx(["image link", "image", "image url", "photo", "media", "video"]),
           iSec = idx(["seconds", "duration"]), iScr = idx(["screens", "screen", "tv"]),
-          iAct = idx(["active"]);
+          iAct = idx(["active"]), iFit = idx(["fit", "photo fit", "image fit"]);
     const out = [];
     for (let r = 1; r < rows.length; r++) {
       const row = rows[r];
       const title = ((iTitle >= 0 && row[iTitle]) || "").trim();
-      const image = convertImageURL(((iImg >= 0 && row[iImg]) || "").trim());
-      if (!title && !image) continue; // blank row
+      const rawURL = ((iImg >= 0 && row[iImg]) || "").trim();
+      const video = isVideoURL(rawURL);
+      const media = video ? rawURL : convertImageURL(rawURL);
+      if (!title && !media) continue; // blank row
       if (iAct >= 0) {
         const act = ((row[iAct]) || "").trim().toLowerCase();
         if (["true", "yes", "y", "1"].indexOf(act) < 0) continue;
@@ -135,10 +144,14 @@
       if (scr && ["both", "all"].indexOf(scr) < 0 && scr.indexOf(pageKey) < 0) continue;
       let sec = parseFloat((iSec >= 0 && row[iSec]) || "");
       if (!isFinite(sec) || sec <= 0) sec = 10;
+      const fitRaw = ((iFit >= 0 && row[iFit]) || "").trim().toLowerCase();
+      const fit = /^(fit|contain|full|whole)/.test(fitRaw) ? "contain" : "cover";
       out.push({
         title: title,
         text: ((iText >= 0 && row[iText]) || "").trim(),
-        image: image,
+        media: media,
+        type: video ? "video" : "image",
+        fit: fit,
         seconds: Math.min(Math.max(sec, 3), 120),
       });
     }
@@ -147,7 +160,7 @@
 
   // Expose pure functions for automated tests (Node); skip browser boot there.
   if (typeof module !== "undefined" && typeof document === "undefined") {
-    module.exports = { parseCSV, toItems, parsePrice, formatPrice, groupItems, buildColumns, toSlides, convertImageURL };
+    module.exports = { parseCSV, toItems, parsePrice, formatPrice, groupItems, buildColumns, toSlides, convertImageURL, isVideoURL };
     return;
   }
 
@@ -258,39 +271,75 @@
       const res = await fetch(SLIDES_URL + sep + "t=" + Date.now(), { cache: "no-store" });
       if (!res.ok) throw new Error("HTTP " + res.status);
       slides = toSlides(parseCSV(await res.text()), PAGE_KEY);
-      // Preload images so slides appear instantly
-      slides.forEach((s) => { if (s.image) { const im = new Image(); im.src = s.image; } });
+      // Preload images so slides appear instantly (videos load on demand)
+      slides.forEach((s) => {
+        if (s.media && s.type === "image") { const im = new Image(); im.src = s.media; }
+      });
     } catch (err) {
       console.error("Slides refresh failed:", err); // keep last good slides
     }
   }
 
   function renderSlide(s) {
-    overlay.querySelector(".slide-bg").style.backgroundImage = s.image ? 'url("' + s.image + '")' : "none";
+    const bg = overlay.querySelector(".slide-bg");
+    const oldVid = overlay.querySelector(".slide-video");
+    if (oldVid) oldVid.remove();
+
+    if (s.type === "video" && s.media) {
+      bg.style.backgroundImage = "none";
+      const vid = document.createElement("video");
+      vid.className = "slide-video";
+      vid.muted = true;            // TVs: autoplay only works muted
+      vid.autoplay = true;
+      vid.loop = true;
+      vid.playsInline = true;
+      vid.style.objectFit = s.fit;
+      vid.src = s.media;
+      overlay.insertBefore(vid, overlay.querySelector(".slide-shade"));
+    } else {
+      bg.style.backgroundImage = s.media ? 'url("' + s.media + '")' : "none";
+      bg.style.backgroundSize = s.fit; // "cover" = fill screen, "contain" = whole photo
+    }
     overlay.querySelector(".slide-title").textContent = s.title;
     overlay.querySelector(".slide-text").textContent = s.text;
-    overlay.classList.toggle("no-image", !s.image);
+    overlay.classList.toggle("no-image", !s.media);
   }
 
-  /* Rotation loop: prices for PRICES_SECS → each slide → prices → … */
-  let rotTimer = null;
-  function rotate(idx) {
-    clearTimeout(rotTimer);
-    if (idx >= slides.length) idx = -1; // also covers "no slides yet"
+  /* Rotation: prices for PRICES_SECS → each slide → prices → …
+     The schedule is computed from the wall clock, so every TV showing
+     the same slide list is automatically IN SYNC (no coordination
+     needed — both devices just follow the time of day). */
+  function currentPhase() {
+    const total = slides.reduce((a, s) => a + s.seconds, 0);
+    if (!total) return -1; // no slides → always prices
+    const pricesSecs = Math.max(10, PRICES_SECS);
+    let t = (Date.now() / 1000) % (pricesSecs + total);
+    if (t < pricesSecs) return -1;
+    t -= pricesSecs;
+    for (let i = 0; i < slides.length; i++) {
+      if (t < slides[i].seconds) return i;
+      t -= slides[i].seconds;
+    }
+    return -1;
+  }
+
+  let shownIdx = -2; // force first update
+  function rotateTick() {
+    const idx = currentPhase();
+    if (idx === shownIdx) return; // nothing to change
+    shownIdx = idx;
     if (idx < 0) {
       overlay.classList.remove("show"); // back to the price board
-      rotTimer = setTimeout(() => rotate(0), Math.max(10, PRICES_SECS) * 1000);
     } else {
       renderSlide(slides[idx]);
       overlay.classList.add("show");
-      rotTimer = setTimeout(() => rotate(idx + 1), slides[idx].seconds * 1000);
     }
   }
 
   if (SLIDES_ENABLED) {
     refreshSlides();
     setInterval(refreshSlides, POLL_INTERVAL_MS);
-    rotate(-1);
+    setInterval(rotateTick, 500);
   }
 
   /* ---------- Live clock (footer) ---------- */

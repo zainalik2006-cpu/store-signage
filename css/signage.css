@@ -200,8 +200,17 @@ footer .halal-note { color: var(--gold-soft); font-weight: 600; }
 .slide-bg {
   position: absolute;
   inset: 0;
-  background-size: cover;
+  background-size: cover;       /* overridden per-slide via the Fit column */
   background-position: center;
+  background-repeat: no-repeat;
+}
+
+.slide-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;            /* overridden per-slide via the Fit column */
 }
 
 .slide-shade {
