@@ -1,0 +1,214 @@
+Item Name,Category,Price,Unit,Active
+Whole Chicken W / Skin,Regular Chicken,3.49,lb,TRUE
+Whole Chicken W / O Skin,Regular Chicken,4.49,lb,TRUE
+Baby Chicken W / Skin *Machine Cut,Regular Chicken,3.99,lb,TRUE
+Baby Chicken W / O Skin *Machine Cut,Regular Chicken,4.99,lb,TRUE
+Chicken Breast - Boneless *Machine Cut,Regular Chicken,5.99,lb,TRUE
+Chicken Leg / Thigh Bone-In W/Skin,Regular Chicken,2.29,lb,TRUE
+Chicken Leg / Thigh Bone-In W/O Skin,Regular Chicken,3.29,lb,TRUE
+Chicken Drumsticks W / Skin,Regular Chicken,2.49,lb,TRUE
+Chicken Drumsticks W/O Skin,Regular Chicken,3.49,lb,TRUE
+Chicken Thigh Bone In W / Skin,Regular Chicken,2.29,lb,TRUE
+Chicken Thigh Bone In W/O Skin,Regular Chicken,2.99,lb,TRUE
+Chicken Thigh Boneless *Machine Cut,Regular Chicken,4.99,lb,TRUE
+Ground Chicken - THIGH,Regular Chicken,4.99,lb,TRUE
+Ground Chicken - BREAST,Regular Chicken,5.99,lb,TRUE
+Ground Chicken - MIX,Regular Chicken,5.49,lb,TRUE
+Chicken Whole Wings,Regular Chicken,4.99,lb,TRUE
+Chicken Leg (HALF BOX),Regular Chicken,44.99,box,TRUE
+Chicken Leg (FULL BOX),Regular Chicken,74.99,box,TRUE
+Chicken Soup Bones,Regular Chicken,1.99,lb,TRUE
+Whole Chicken - ABF W / Skin,ABF Chicken,3.99,lb,TRUE
+Whole Chicken - ABF W / O Skin,ABF Chicken,4.99,lb,TRUE
+Chicken Breast Boneless - ABF,ABF Chicken,6.99,lb,TRUE
+Chicken Breast Strips - ABF,ABF Chicken,6.99,lb,TRUE
+Chicken Breast Cubes - ABF,ABF Chicken,6.99,lb,TRUE
+Chicken Breast Tenders - ABF,ABF Chicken,6.99,lb,TRUE
+Chicken Leg/Thigh Bone-In-ABF W / Skin,ABF Chicken,2.99,lb,TRUE
+Chicken Leg/Thigh Bone-In-ABF W/O Skin,ABF Chicken,3.99,lb,TRUE
+Chicken Drumsticks - ABF W / Skin,ABF Chicken,2.99,lb,TRUE
+Chicken Drumsticks-ABF W/O Skin,ABF Chicken,3.99,lb,TRUE
+Chicken Thigh Bone-In - ABF W / Skin,ABF Chicken,2.99,lb,TRUE
+Chicken Thigh Bone-In-ABF W/O Skin,ABF Chicken,3.99,lb,TRUE
+Chicken Thigh Boneless - ABF,ABF Chicken,6.99,lb,TRUE
+Ground Chicken THIGH - ABF,ABF Chicken,6.99,lb,TRUE
+Ground Chicken BREAST - ABF,ABF Chicken,6.99,lb,TRUE
+Ground Chicken MIX - ABF,ABF Chicken,6.99,lb,TRUE
+Chicken Leg - ABF (FULL BOX),ABF Chicken,94.99,box,TRUE
+Chicken Leg - ABF (HALF BOX),ABF Chicken,49.99,box,TRUE
+Chicken Liver,ABF Chicken,3.99,lb,TRUE
+Chicken Thigh Boneless-ABF(Box),ABF Chicken,220.00,box,TRUE
+Chicken Breast ABF - (FULL BOX),ABF Chicken,239.99,box,TRUE
+Chicken Leg / Thigh - Marinated,Marinated Chicken,3.99,lb,TRUE
+Chicken Breast Boneless - Marinated,Marinated Chicken,7.99,lb,TRUE
+Chicken Thigh Boneless - Marinated,Marinated Chicken,5.99,lb,TRUE
+Chicken Thigh ABF - Marinated,Marinated Chicken,4.99,lb,TRUE
+Chicken Breast Boneless - ABF Marinated,Marinated Chicken,7.99,lb,TRUE
+Chicken Thigh Boneless - ABF Marinated,Marinated Chicken,7.99,lb,TRUE
+Chicken Wings - Marinated,Marinated Chicken,5.99,lb,TRUE
+Chicken Sausages,Marinated Chicken,7.99,lb,TRUE
+Chicken Seekh Kabab,Marinated Chicken,7.99,lb,TRUE
+Chicken Qeema Masala,Marinated Chicken,7.99,lb,TRUE
+Chicken Chapli Kabab,Marinated Chicken,7.99,lb,TRUE
+Chicken Leg Marinated - ABF,Marinated Chicken,4.99,lb,TRUE
+Whole Chicken ABF - Marinated,Marinated Chicken,5.99,lb,TRUE
+Whole Chicken - Marinated,Marinated Chicken,5.99,lb,TRUE
+Desi Hard Chicken (EACH),Marinated Chicken,29.99,ea,TRUE
+Chicken Feet,Marinated Chicken,3.99,lb,TRUE
+Chicken Gizzard,Marinated Chicken,3.99,lb,TRUE
+Beef Squar,Beef,10.99,lb,TRUE
+Beef Leg - WHOLE,Beef,6.49,lb,TRUE
+Beef Bottom Round,Beef,9.99,lb,TRUE
+Beef Leg - HALF,Beef,6.99,lb,TRUE
+Chuck Roll,Beef,11.99,lb,TRUE
+Beef Shoulder - WHOLE,Beef,5.99,lb,TRUE
+Beef Pasanda / Steak,Beef,10.99,lb,TRUE
+Beef Shoulder - HALF,Beef,6.49,lb,TRUE
+Beef Mix-SPECIAL PROMO (10 LB),Beef,,ea,TRUE
+"Beef - MIX (Cleaned, Fat Removed)",Beef,7.99,lb,TRUE
+ANGUS Beef Short Ribs,Beef,8.99,lb,TRUE
+Beef Shank - Bone In,Beef,8.99,lb,TRUE
+Beef Brisket,Beef,8.99,lb,TRUE
+Beef Shank - Boneless,Beef,9.99,lb,TRUE
+Beef Feet,Beef,6.99,lb,TRUE
+Ground Beef (80/20%),Beef,8.99,lb,TRUE
+Beef Liver,Beef,4.99,lb,TRUE
+Ground Beef - Lean (85/15%),Beef,8.99,lb,TRUE
+Beef Head (Each),Beef,25.00,ea,TRUE
+Ground Beef - Lean (90/10%),Beef,9.99,lb,TRUE
+Beef Brain,Beef,9.99,lb,TRUE
+Beef Ground - Extra Lean (96/4%),Beef,9.99,lb,TRUE
+Beef Tripe / Stomach - Honeycomb,Beef,7.99,lb,TRUE
+Beef Cubes - Boneless,Beef,9.99,lb,TRUE
+Beef Tongue,Beef,9.99,lb,TRUE
+Beef Strips - Boneless,Beef,10.99,lb,TRUE
+Oxtail,Beef,9.99,lb,TRUE
+Eye Round Roast,Beef,9.99,lb,TRUE
+Beef Soup Bones,Beef,3.99,lb,TRUE
+ANGUS Top Sirloin,Beef,10.99,lb,TRUE
+Beef Nali / Marrow Bone,Beef,5.99,lb,TRUE
+Whole Veal,Veal,7.99,lb,TRUE
+Half Veal,Veal,7.99,lb,TRUE
+Veal Shoulder - WHOLE,Veal,8.49,lb,TRUE
+Veal Shoulder - HALF,Veal,8.99,lb,TRUE
+Veal Leg - WHOLE,Veal,9.49,lb,TRUE
+Veal Leg - HALF,Veal,9.99,lb,TRUE
+Veal Chops,Veal,10.99,lb,TRUE
+Veal Steak - T Bone,Veal,10.99,lb,TRUE
+Veal Ribs,Veal,8.99,lb,TRUE
+Veal Ground,Veal,12.99,lb,TRUE
+Veal Mix (Cleaned),Veal,9.99,lb,TRUE
+Veal Cubes Boneless,Veal,12.99,lb,TRUE
+Veal Strips Boneless,Veal,12.99,lb,TRUE
+Veal Shank - Bone In,Veal,9.99,lb,TRUE
+Veal Shank - Boneless,Veal,12.99,lb,TRUE
+Boneless Ribeye - ANGUS,Steaks,14.99,lb,TRUE
+Boneless RibEye - SELECT,Steaks,14.99,lb,TRUE
+Boneless RibEye - CHOICE,Steaks,19.99,lb,TRUE
+Boneless RibEye - PRIME,Steaks,24.99,lb,TRUE
+Bone in RibEye - ANGUS,Steaks,12.99,lb,TRUE
+NY Strip - PRIME,Steaks,,lb,TRUE
+NY Strip - CHOICE,Steaks,17.99,lb,TRUE
+NY Strip Bone In - ANGUS,Steaks,8.99,lb,TRUE
+T-Bone Steak - ANGUS,Steaks,9.99,lb,TRUE
+T-Bone / Porterhouse - PRIME,Steaks,27.99,lb,TRUE
+Tomahawk Steak - CHOICE,Steaks,12.99,lb,TRUE
+Beef Tenderloin - ANGUS,Steaks,19.99,lb,TRUE
+Ribeye Bone In - ANGUS,Steaks,12.99,lb,TRUE
+Flank Steak / Strips - ANGUS,Steaks,12.99,lb,TRUE
+Skirt Steak / Strips - ANGUS,Steaks,12.99,lb,TRUE
+Beef Minute Steak,Steaks,10.99,lb,TRUE
+Adana Kabab,Marinated Beef & Deli,9.99,lb,TRUE
+Beef Koobideh / Kebab,Marinated Beef & Deli,9.99,lb,TRUE
+Lamb Shish Kebab,Marinated Beef & Deli,16.99,lb,TRUE
+Beef Sausages,Marinated Beef & Deli,8.99,lb,TRUE
+ANGUS Burger Patty,Marinated Beef & Deli,9.99,lb,TRUE
+Beef Chapli Kebab,Marinated Beef & Deli,9.99,lb,TRUE
+Beef Seekh Kebab,Marinated Beef & Deli,9.99,lb,TRUE
+Beef Shish Kebab,Marinated Beef & Deli,10.99,lb,TRUE
+Lamb Sausages,Marinated Beef & Deli,10.99,lb,TRUE
+Beef Kofta / Meatballs,Marinated Beef & Deli,10.99,lb,TRUE
+Veal Chops - Marinated,Marinated Beef & Deli,11.99,lb,TRUE
+Halal Beef Bacon,Marinated Beef & Deli,12.99,lb,TRUE
+Halal Beef Pepperoni,Marinated Beef & Deli,14.99,lb,TRUE
+Halal Roast Beef,Marinated Beef & Deli,12.99,lb,TRUE
+Halal Beef Salami,Marinated Beef & Deli,10.99,lb,TRUE
+Halal Turkey Breast - Sliced,Marinated Beef & Deli,10.99,lb,TRUE
+Whole Goat,Goat,8.99,lb,TRUE
+Half Goat,Goat,9.99,lb,TRUE
+Goat Shoulder,Goat,10.99,lb,TRUE
+Goat Shoulder - HALF,Goat,11.99,lb,TRUE
+Goat Leg,Goat,11.99,lb,TRUE
+Goat Leg - HALF,Goat,12.99,lb,TRUE
+Goat Chops,Goat,13.99,lb,TRUE
+Goat Mix (Cleaned),Goat,13.99,lb,TRUE
+Ground Goat,Goat,16.99,lb,TRUE
+Goat Feet / Paya,Goat,7.99,lb,TRUE
+Goat Brain,Goat,16.99,lb,TRUE
+Goat Head (Each),Goat,7.99,ea,TRUE
+Goat Trip / Stomach,Goat,7.99,lb,TRUE
+Goat Soup Bones,Goat,8.99,lb,TRUE
+Goat Liver / Kidney / Heart,Goat,10.99,lb,TRUE
+Baby Goat Neck,Baby Goat,14.99,lb,TRUE
+Whole Baby Goat,Baby Goat,12.49,lb,TRUE
+Half Baby Goat,Baby Goat,13.99,lb,TRUE
+Baby Goat Leg,Baby Goat,15.99,lb,TRUE
+Baby Goat Leg - HALF,Baby Goat,16.99,lb,TRUE
+Baby Goat Shoulder,Baby Goat,14.99,lb,TRUE
+Baby Goat Shoulder - HALF,Baby Goat,15.99,lb,TRUE
+Baby Goat Mix (Cleaned),Baby Goat,16.99,lb,TRUE
+Baby Goat Chops,Baby Goat,15.99,lb,TRUE
+Baby Goat Ground,Baby Goat,18.99,lb,TRUE
+Baby Goat Ribs,Baby Goat,14.99,lb,TRUE
+Lamb Squar,Lamb,14.99,lb,TRUE
+Lamb Tongue,Lamb,12.99,lb,TRUE
+Lamb Liver / Kidney / Heart,Lamb,8.99,lb,TRUE
+Lamb Brain,Lamb,16.99,lb,TRUE
+Lamb Neck,Lamb,14.99,lb,TRUE
+Lamb Trip / Stomach,Lamb,8.99,lb,TRUE
+Whole Lamb,Lamb,9.49,lb,TRUE
+Half Lamb,Lamb,9.99,lb,TRUE
+Lamb Leg,Lamb,11.99,lb,TRUE
+Lamb Leg - HALF,Lamb,12.99,lb,TRUE
+Lamb Shoulder,Lamb,10.99,lb,TRUE
+Lamb Shoulder - HALF,Lamb,11.99,lb,TRUE
+Lamb Mix (Cleaned),Lamb,13.99,lb,TRUE
+Lamb Chops,Lamb,13.99,lb,TRUE
+Lamb Ground,Lamb,14.99,lb,TRUE
+Lamb Shank FZ (AUST/NZ),Lamb,8.99,lb,TRUE
+Lamb Head (Each),Lamb,7.99,ea,TRUE
+Lamb Feet / Paya,Lamb,6.99,lb,TRUE
+Lamb Feet / Paya - Smoked,Lamb,6.99,lb,TRUE
+Lamb Boneless Cubes,Lamb,14.99,lb,TRUE
+Lamb Fat,Lamb,4.99,lb,TRUE
+Lamb 'Fries' Testicals,Lamb,5.99,lb,TRUE
+Whole Baby Lamb,Baby Lamb,10.49,lb,TRUE
+Half Baby Lamb,Baby Lamb,11.99,lb,TRUE
+Baby Lamb Leg,Baby Lamb,13.99,lb,TRUE
+Baby Lamb Leg - HALF,Baby Lamb,14.99,lb,TRUE
+Baby Lamb Shoulder,Baby Lamb,14.99,lb,TRUE
+Baby Lamb Shoulder - HALF,Baby Lamb,13.99,lb,TRUE
+Baby Lamb Mx (Cleaned),Baby Lamb,14.99,lb,TRUE
+Baby Lamb Chops,Baby Lamb,14.99,lb,TRUE
+Baby Lamb Ribs,Baby Lamb,11.99,lb,TRUE
+Roomi Cheese,Misc,10.99,lb,TRUE
+Goat Kofta / Meatball,Misc,16.99,lb,TRUE
+Yellow Banana,Misc,1.49,lb,TRUE
+Pomegranate (EA),Misc,2.99,ea,TRUE
+Red Grapes,Misc,4.99,lb,TRUE
+Green Grapes,Misc,4.99,lb,TRUE
+Clementine Loose,Misc,4.99,lb,TRUE
+Gala Apple Loose,Misc,1.99,lb,TRUE
+Ripe Papaya,Misc,2.99,lb,TRUE
+Halal Turkey Whole (F.Z),Misc,2.99,lb,TRUE
+Halal Turkey Whole (Fresh),Misc,4.99,lb,TRUE
+Deli Halal Chicken - Sliced,Misc,9.99,lb,TRUE
+Smoked Turkey Thigh - SLICED,Misc,9.99,lb,TRUE
+Turkey Pastrami,Misc,9.99,lb,TRUE
+Pompano Fish - Marinated,Misc,9.99,lb,TRUE
+King Fish - Marinated,Misc,11.00,lb,TRUE
+King Fish Steak (F.Z),Misc,10.99,lb,TRUE
+Turkey Leg,Misc,2.99,lb,TRUE
+Turkey Whole Wing,Misc,4.99,lb,TRUE
+Goat Head (EA),Misc,5.99,ea,TRUE
+Saahil Baby Goat,Misc,13.99,lb,TRUE

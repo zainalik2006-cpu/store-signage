@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<!-- TV 1 — Chicken & Marinated Items. Open this file on the chicken TV. -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fresh Halal Chicken &amp; Marinated Items</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/signage.css" />
+</head>
+<body data-page="chicken">
+  <div id="demo-bar" class="hidden">DEMO MODE — paste your Google Sheet link in js/config.js to show live prices</div>
+
+  <header>
+    <div class="brand">Halal 4 All &bull; Premium Halal Meat &amp; Grocery</div>
+    <h1 id="page-heading">Fresh Halal Chicken &amp; Marinated Items</h1>
+  </header>
+
+  <main id="board"><!-- items are rendered here by js/signage.js --></main>
+
+  <footer>
+    <span>Prices subject to change</span>
+    <span class="halal-note">&#9733; Fresh hand-slaughtered halal meat available &#9733;</span>
+    <span id="last-updated"></span>
+  </footer>
+
+  <div id="loading"><div class="spinner"></div><div>Loading today&rsquo;s prices&hellip;</div></div>
+  <div id="error-bar" class="hidden"></div>
+
+  <script src="js/config.js"></script>
+  <script src="js/signage.js"></script>
+</body>
+</html>
